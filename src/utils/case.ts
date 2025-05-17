@@ -43,14 +43,19 @@ const toSnakeCase = (str: string): string =>
 const isObject = (val: unknown): val is Record<string, unknown> =>
   typeof val === "object" && val !== null && !Array.isArray(val);
 
-export const snakecased = (obj: unknown): unknown =>
-  Array.isArray(obj)
-    ? obj.map(snakecased)
-    : isObject(obj)
-    ? Object.fromEntries(
-        Object.entries(obj).map(([key, value]) => [
-          toSnakeCase(key),
-          snakecased(value),
-        ])
-      )
-    : obj;
+export const snakecased = (obj: unknown): unknown => {
+  if (Array.isArray(obj)) {
+    return obj.map(snakecased);
+  }
+
+  if (isObject(obj)) {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => [
+        toSnakeCase(key),
+        snakecased(value),
+      ])
+    );
+  }
+
+  return obj;
+};

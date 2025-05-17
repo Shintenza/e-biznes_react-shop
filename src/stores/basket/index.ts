@@ -16,7 +16,7 @@ const useBasketStore = create<BasketStore>((set, get) => ({
         return {
           products: [
             ...state.products,
-            { ...product, quantity: product.quantity || 1 },
+            { ...product, quantity: product.quantity ?? 1 },
           ],
         };
       }

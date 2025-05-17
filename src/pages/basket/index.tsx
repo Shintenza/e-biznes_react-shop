@@ -23,7 +23,7 @@ const Basket = () => {
       {isBasketEmpty && <Text>The basket is empty</Text>}
       <Stack>
         {products.map((product) => (
-          <BasketItem product={product} />
+          <BasketItem product={product} key={product.id} />
         ))}
       </Stack>
 
